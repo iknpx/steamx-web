@@ -1,0 +1,47 @@
+pipeline:
+  install:
+    image: node:carbon
+    commands:
+      - npm install --quiet
+    when:
+      branch:
+        include: [ master, feature/* ]
+      event:
+        - push
+        - pull_request
+
+  lint:
+    image: node:carbon
+    commands:
+      - npm run lint
+    when:
+      branch:
+        include: [ master, feature/* ]
+      event:
+        - push
+        - pull_request
+
+  build/ui:
+    image: node:carbon
+    environment:
+      - NODE_ENV=production
+    commands:
+      - npm run dist
+    when:
+      branch:
+        include: [ master, feature/* ]
+      event:
+        - push
+        - pull_request
+
+  deploy:
+    image: node:carbon
+    secrets: [ root_key ]
+    commands:
+      - npm install -g gulp
+      - gulp deploy:production
+    when:
+      branch:
+        include: [ master ]
+      event:
+        - push

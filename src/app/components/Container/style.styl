@@ -1,0 +1,21 @@
+@import '~s-grid/s-grid-settings'
+@import '~s-grid/s-grid-functions'
+@import '~@style/variables'
+@import '~@style/mixins/media'
+
+.container
+	grid()
+
+	width 100%
+
++media-retina()
+	.container
+		width $screen-retina
+
++media-desktop()
+	.container
+		width $screen-desktop
+
++media-tablet()
+	.container
+		width $screen-tablet
