@@ -13,7 +13,7 @@ import { store, history } from './store';
 
 class App extends Component {
     componentDidMount() {
-        onConnect(store.dispatch);
+        store.dispatch(onConnect);
     }
 
     render() {

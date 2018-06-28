@@ -1,4 +1,4 @@
 import { createAction } from 'redux-act';
 
-export const socketsReady = createAction('socket connection ready');
-export const socketsLost = createAction('socket connection lost');
+export const socketsReadyAction = createAction('socket connection ready');
+export const socketsLostAction = createAction('socket connection lost');

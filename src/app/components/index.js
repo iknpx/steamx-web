@@ -1,4 +1,3 @@
-export ButtonLink from './ButtonLink';
 export ClickOutside from './ClickOutside';
 export Container from './Container';
 export Header from './Header';
