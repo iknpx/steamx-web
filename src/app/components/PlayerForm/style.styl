@@ -1,0 +1,58 @@
+@import '~@style/mixins/animate'
+
+.container
+	position relative
+	height calc(100vh - 100px)
+	width 100vw
+
+.panel
+	fadeIn(.3s)
+
+	width 475px
+	height 300px
+	background-color #242629
+	top 20vh
+	position absolute
+	transition left .4s ease
+	left 50%
+	margin-left -(475px / 2)
+	padding 40px
+	display flex
+	flex-direction column
+	align-items flex-start
+
+.form
+	position relative
+	width 100vw
+
+.hidden
+	&-left
+		left -9999px
+
+.title
+	color #C8C8C8
+	font-size 18px
+	margin 20px 0
+
+.label
+	color #5F5F5F
+	font-size 12px
+	margin-bottom 5px
+
+.input
+	outline 0
+	border 0
+	background-color #6A6A6A
+	height 35px
+	width 90%
+	margin-bottom 40px
+	color #C8C8C8
+	font-size 18px
+	padding 0 10px
+
+.buttons
+	display flex
+
+	& > button
+		&:not(:last-child)
+			margin-right 25px

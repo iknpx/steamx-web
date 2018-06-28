@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 
 import '@style/global.styl';
-import { Layout } from '@/components';
+import { Header, Layout } from '@/components';
 
-import { StartPage } from './routes';
+import { MainRoute } from './routes';
 import { onConnect } from './sockets';
 import { store, history } from './store';
 
@@ -21,10 +21,8 @@ class App extends Component {
             <Provider store={store}>
                 <ConnectedRouter history={history}>
                     <Layout>
-                        <Switch>
-                            <Route exact path='/' component={StartPage} />
-                            <Redirect to="/" />
-                        </Switch>
+                        <Header />
+                        <Route path='/' component={MainRoute} />
                     </Layout>
                 </ConnectedRouter>
             </Provider>
