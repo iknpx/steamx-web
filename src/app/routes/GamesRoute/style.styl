@@ -1,3 +1,5 @@
+@import '~@style/variables'
+@import '~@style/mixins/media'
 @import '~s-grid/s-grid-settings'
 @import '~s-grid/s-grid-functions'
 
@@ -63,3 +65,18 @@
 .placeholder
 	font-size 24px
 	color #999
+
++media-mobile()
+	.top
+		&-game
+			display none
+
+		&-actions
+			justify-content center
+			align-content space-around
+			height 100%
+
+	.games
+		align-items center
+		outline 1px solid green
+

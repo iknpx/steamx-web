@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { Button, Container, Game, Loading, Player } from '@/components';
+import { Button, Container, Game, Loading, Player, Preloader } from '@/components';
 import { requestClearGames, requestPlayersList, removePlayer } from '@/sockets';
 import style from './style.styl';
 
@@ -60,6 +60,10 @@ export default class GameRoute extends Component {
         const resultGames = games.list.filter(game => !game.empty);
         const value = 100 / games.list.length * resultGames.length;
 
+        const placeholder = players.isFetchingList || games.isFetching
+            ? <Preloader />
+            : !resultGames.length ? <span className={style.placeholder}>No multiplayer games found</span> : null;
+
         return (
             <div className={style.container}>
                 <section className={style.top}>
@@ -81,7 +85,7 @@ export default class GameRoute extends Component {
                     {games.isVaitingDetails ? <Loading value={value} /> : null }
                 </Container>
                 <Container className={style.games}>
-                    {!resultGames.length ? <span className={style.placeholder}>No multiplayer games found</span> : null}
+                    {placeholder}
                     {resultGames.map(game => <Game key={game.appid} game={game} rowview={rowview} />)}
                 </Container>
             </div>
