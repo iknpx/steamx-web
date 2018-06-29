@@ -1,4 +1,6 @@
 @import '~@style/mixins/animate'
+@import '~@style/variables'
+@import '~@style/mixins/media'
 
 .container
 	fadeIn(.3s)
@@ -21,3 +23,7 @@
 	font-size 18px
 	color #bdbdbd
 	margin-bottom 30px
+
++media-mobile()
+	.container
+		top 0
