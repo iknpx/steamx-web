@@ -1,0 +1,78 @@
+@import '~@style/variables'
+@import '~@style/mixins/media'
+@import '~@style/mixins/animate'
+@import '~s-grid/s-grid-settings'
+@import '~s-grid/s-grid-functions'
+
++media-retina()
+	.container
+		fadeInLeft(.3s)
+		cell(1, 3)
+
++media-desktop()
+	.container
+		fadeInLeft(.3s)
+		cell(1, 3)
+
++media-tablet()
+	.container
+		fadeInLeft(.3s)
+		cell(1, 2)
+
+
++media-mobile()
+	.container
+		fadeInDown(.3s)
+		cell(1, 1)
+
+.container
+	background: #FFFFFF;
+	border 1px solid #DEDEDE
+	border-radius 2px
+	box-shadow 0 1px 2px 0 rgba(0, 0, 0, .07)
+	height 400px
+
+.image
+	height 200px
+	border-top-left-radius 2px
+	border-top-right-radius 2px
+
+.description
+	display flex
+	flex-direction column
+	height 200px
+	overflow hidden
+	padding 20px
+
+.title
+	font-size 14px
+	color #666
+
+.date
+	color #696969
+	font-size 12px
+	font-weight 300
+
+.text
+	color #696969
+	font-size 12px
+	font-weight 300
+	margin 20px 0 0
+	overflow scroll
+
+.rowview
+	cell(1, 1)
+	fadeInDown(.3s)
+
+	height 200px
+	display flex
+	justify-content flex-start
+
+	.image
+		width 280px
+		border-top-left-radius 2px
+		border-bottom-left-radius 2px
+		border-top-right-radius 0
+
+	.description
+		flex 1

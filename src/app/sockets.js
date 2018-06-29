@@ -13,6 +13,7 @@ import {
     onGamesQueueEmptyAction,
     requestClearGamesAction,
     requestGamesListAction,
+    removeGamesAction,
 } from './reducers/games/actions';
 
 import {
@@ -20,6 +21,7 @@ import {
     onPlayersListAction,
     requestPlayerDetailsAction,
     requestPlayersListAction,
+    removePlayerAction,
 } from './reducers/players/actions';
 
 export const socket = io(WSHOST);
@@ -38,7 +40,7 @@ export const onConnect = dispatch => {
     });
 };
 
-export const requestGames = payload => dispatch => {
+export const requestGamesList = payload => dispatch => {
     dispatch(requestGamesListAction());
     socket.emit(MESSAGES.REQUEST.GAMES, payload);
 };
@@ -56,6 +58,11 @@ export const requestPlayerDetails = payload => dispatch => {
 export const requestPlayersList = payload => dispatch => {
     dispatch(requestPlayersListAction());
     socket.emit(MESSAGES.REQUEST.PLAYERS, payload);
+};
+
+export const removePlayer = (player, apps) => dispatch => {
+    dispatch(removePlayerAction(player));
+    dispatch(removeGamesAction(apps));
 };
 
 function onDisconnect(dispatch) {
@@ -84,4 +91,10 @@ function onPlayerDetails(dispatch, payload) {
 
 function onPlayersList(dispatch, payload) {
     dispatch(onPlayersListAction(payload));
+
+    const apps = payload
+        .reduce((result, player) => [ ...result, ...player.apps ], [])
+        .reduce((result, appid) => ({ ...result, [appid]: appid }), {});
+
+    dispatch(requestGamesList(Object.keys(apps)));
 }

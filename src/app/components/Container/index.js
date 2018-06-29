@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import style from './style.styl';
 
-export default class Content extends Component {
+export default class Container extends Component {
     static propTypes = {
-        children: PropTypes.any.isRequired,
+        children: PropTypes.any,
         className: PropTypes.string,
     };
 

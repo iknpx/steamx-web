@@ -9,7 +9,7 @@ export const MESSAGES = {
         PLAYERS: 'get::fetch::persons',
     },
     DELETE: {
-        GAMES: 'get::clear::apps',
+        GAMES: 'post::clear::apps',
     },
     SUBSCRIBES: {
         EMPTYQUEUE: 'post::fetch::queue::empty',

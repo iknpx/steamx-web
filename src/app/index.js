@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import '@style/global.styl';
 import { Header, Layout } from '@/components';
 
-import { MainRoute } from './routes';
+import { GamesRoute, MainRoute } from './routes';
 import { onConnect } from './sockets';
 import { store, history } from './store';
 
@@ -22,7 +22,9 @@ class App extends Component {
                 <ConnectedRouter history={history}>
                     <Layout>
                         <Header />
-                        <Route path='/' component={MainRoute} />
+                        <Route exact path='/' component={MainRoute} />
+                        <Route path='/start' component={MainRoute} />
+                        <Route path='/games/:players' component={GamesRoute} />
                     </Layout>
                 </ConnectedRouter>
             </Provider>

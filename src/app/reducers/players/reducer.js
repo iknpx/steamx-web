@@ -4,6 +4,7 @@ import {
     onPlayersListAction,
     requestPlayerDetailsAction,
     requestPlayersListAction,
+    removePlayerAction,
 } from './actions';
 
 export default createReducer({
@@ -11,6 +12,7 @@ export default createReducer({
     [onPlayersListAction]: (store, payload) => ({ ...store, isFetchingList: false, list: payload }),
     [requestPlayerDetailsAction]: (store) => ({ ...store, isFetchingDetails: true }),
     [requestPlayersListAction]: (store) => ({ ...store, isFetchingList: true }),
+    [removePlayerAction]: (store, payload) => ({ ...store, list: store.list.filter(player => player.id !== payload.id)}),
 }, {
     isFetchingList: false,
     isFetchingDetails: false,

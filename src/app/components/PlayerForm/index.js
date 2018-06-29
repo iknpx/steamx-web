@@ -14,23 +14,28 @@ export default class PlayerForm extends Component {
     };
 
     state = {
-        activeFrom: 1,
         forms: [{
             id: 1,
             value: '',
         }],
     };
 
-    handleAdd = id => () => {
-        // TODO: check if value is valid
-        // TODO: check if user exist
-        // TODO: const { forms } = this.state;
-        // TODO: const { value } = forms.find(form => form.id === id);
-        // TODO: result = value.split('https://steamcommunity.com/id/')[1] || value
+    validateForm = () => {
+        const { forms } = this.state;
+
+        return !forms.filter(form => form.value.length === 0 || form.value.search(',') !== -1).length;
+    }
+
+    handleAdd = () => {
+        const { forms } = this.state;
 
         this.setState({
-            activeFrom: id + 1,
-        }, () => this.putNewForm(id));
+            forms: [...forms, {
+                id: forms.length + 1,
+                valid: 0,
+                value: '',
+            }],
+        });
     };
 
     handleInputChange = id => event => {
@@ -40,59 +45,44 @@ export default class PlayerForm extends Component {
         const index = forms.findIndex(form => form.id === id);
 
         this.setState({
-            forms: [...forms.slice(0, index), {...forms[index], value }, ...forms.slice(index + 1)],
+            forms: [...forms.slice(0, index), { ...forms[index], valid: 0, value }, ...forms.slice(index + 1)],
         });
     };
 
     handleSubmit = event => {
         event.preventDefault();
         const { dispatch } = this.props;
-        // const { forms } = this.state;
-
-        // const result = forms.reduce((result, form) => [
-        //     ...result,
-        //     form.value.split('https://steamcommunity.com/id/')[1] || form.value,
-        // ], []);
-
-        dispatch(push('/'));
-    };
-
-    putNewForm = id => {
         const { forms } = this.state;
 
-        setTimeout(() => {
-            this.setState({
-                forms: [...forms, {
-                    id: id + 1,
-                    value: '',
-                }],
-            });
-        }, 400);
+        const result = forms.reduce((result, form, index, players) => {
+            return result + `${form.value.split('https://steamcommunity.com/id/')[1] || form.value}${index !== players.length - 1 ? ',' : ''}`;
+        }, '');
+
+        dispatch(push(`/games/${result}`));
     };
 
     render() {
-        const { activeFrom, forms } = this.state;
+        const { forms } = this.state;
 
         return (
             <Container className={style.container}>
                 <form onSubmit={this.handleSubmit} className={style.form}>
-                    {forms.map(form => (
-                        <div key={form.id} className={`${style.panel} ${form.id < activeFrom ? style.hiddenLeft : ''}`}>
-                            <span className={style.title}>Steam Account</span>
-                            <label className={style.label}>Steam account name or profile link</label>
-                            <input type="text"
+
+                    <div className={style.panel}>
+                        <span className={style.title}>Steam Account</span>
+                        <label className={style.label}>Steam account name or profile link</label>
+                        {forms.map(form => (
+                            <input key={form.id}  type="text"
                                 className={style.input}
                                 onChange={this.handleInputChange(form.id)}
                                 value={form.value}
                             />
-                            <div className={style.buttons}>
-                                <Button type="submit">done</Button>
-                                <Button icon="arrow-right" onClick={this.handleAdd(form.id)}>
-                                    next
-                                </Button>
-                            </div>
+                        ))}
+                        <div className={style.buttons}>
+                            <Button icon="plus" onClick={this.handleAdd}>Add</Button>
+                            {this.validateForm() ? <Button type="submit">done</Button> : null}
                         </div>
-                    ))}
+                    </div>
                 </form>
             </Container>
         );
