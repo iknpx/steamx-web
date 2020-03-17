@@ -1,8 +1,8 @@
 pipeline:
   install:
-    image: node:carbon
+    image: iknpx/archnode
     commands:
-      - npm install --quiet
+      - yarn
     when:
       branch:
         include: [ master, feature/* ]
@@ -11,9 +11,9 @@ pipeline:
         - pull_request
 
   lint:
-    image: node:carbon
+    image: iknpx/archnode
     commands:
-      - npm run lint
+      - yarn lint
     when:
       branch:
         include: [ master, feature/* ]
@@ -22,11 +22,11 @@ pipeline:
         - pull_request
 
   build/ui:
-    image: node:carbon
+    image: iknpx/archnode
     environment:
       - NODE_ENV=production
     commands:
-      - npm run dist
+      - yarn dist
     when:
       branch:
         include: [ master, feature/* ]
@@ -35,11 +35,10 @@ pipeline:
         - pull_request
 
   deploy:
-    image: node:carbon
+    image: iknpx/archnode
     secrets: [ SSH_KEY, SSH_HOST, SSH_PATH ]
     commands:
-      - npm install -g gulp
-      - gulp deploy:production
+      - yarn gulp deploy:production
     when:
       branch:
         include: [ master ]
