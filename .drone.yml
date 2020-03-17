@@ -36,7 +36,7 @@ pipeline:
 
   deploy:
     image: node:carbon
-    secrets: [ ssh_key, ssh_host ]
+    secrets: [ SSH_KEY, SSH_HOST, SSH_PATH ]
     commands:
       - npm install -g gulp
       - gulp deploy:production

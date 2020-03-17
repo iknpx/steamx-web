@@ -1,11 +1,7 @@
-# steamx-web
+## [steamx-web](https://steamx.dayler.dev)
 
-[![Build Status](https://drone.dayler.io/api/badges/iknpx/steamx-web/status.svg)](https://drone.dayler.io/iknpx/steamx-web)
-
-
-### Example
-[https://steamx.ml](https://steamx.ml)
+[![Build Status](https://drone.dayler.dev/api/badges/iknpx/steamx-web/status.svg)](https://drone.dayler.dev/iknpx/steamx-web)
 
 ### Example with Steam Accounts
-[https://steamx.ml/games/tryr,molotoko](https://steamx.ml/games/tryr,molotoko)
+[https://steamx.dayler.dev/games/tryr,molotoko](https://steamx.dayler.dev/games/tryr,molotoko)
 

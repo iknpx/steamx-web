@@ -1,5 +1,4 @@
-export const DEBUG = process.env.NODE_ENV !== 'production';
-export const WSHOST = DEBUG ? 'http://localhost:5000' : 'https://api.steamx.ml';
+export const WSHOST = 'https://steamxapi.herokuapp.com';
 
 export const MESSAGES = {
     REQUEST: {

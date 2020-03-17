@@ -70,7 +70,7 @@ export default class PlayerForm extends Component {
 
                     <div className={style.panel}>
                         <span className={style.title}>Steam Account</span>
-                        <label className={style.label}>Steam account name or profile link</label>
+                        <span className={style.label}>Steam account name or profile link</span>
                         {forms.map(form => (
                             <input key={form.id}  type="text"
                                 className={style.input}
